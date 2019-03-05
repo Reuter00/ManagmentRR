@@ -9,23 +9,22 @@ using ManagmentRR.Models;
 
 namespace ManagmentRR.Controllers
 {
-    public class TapesController : Controller
+    public class EmpresasController : Controller
     {
         private readonly ManagmentRRContext _context;
 
-        public TapesController(ManagmentRRContext context)
+        public EmpresasController(ManagmentRRContext context)
         {
             _context = context;
         }
 
-        // GET: Tapes
+        // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            var managmentRRContext = _context.Tape.Include(t => t.Empresa);
-            return View(await managmentRRContext.ToListAsync());
+            return View(await _context.Empresas.ToListAsync());
         }
 
-        // GET: Tapes/Details/5
+        // GET: Empresas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace ManagmentRR.Controllers
                 return NotFound();
             }
 
-            var tape = await _context.Tape
-                .Include(t => t.Empresa)
+            var empresa = await _context.Empresas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tape == null)
+            if (empresa == null)
             {
                 return NotFound();
             }
 
-            return View(tape);
+            return View(empresa);
         }
 
-        // GET: Tapes/Create
+        // GET: Empresas/Create
         public IActionResult Create()
         {
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id");
             return View();
         }
 
-        // POST: Tapes/Create
+        // POST: Empresas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Data,EmpresaId")] Tape tape)
+        public async Task<IActionResult> Create([Bind("Id,Nome")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tape);
+                _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", tape.EmpresaId);
-            return View(tape);
+            return View(empresa);
         }
 
-        // GET: Tapes/Edit/5
+        // GET: Empresas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace ManagmentRR.Controllers
                 return NotFound();
             }
 
-            var tape = await _context.Tape.FindAsync(id);
-            if (tape == null)
+            var empresa = await _context.Empresas.FindAsync(id);
+            if (empresa == null)
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", tape.EmpresaId);
-            return View(tape);
+            return View(empresa);
         }
 
-        // POST: Tapes/Edit/5
+        // POST: Empresas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Data,EmpresaId")] Tape tape)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Empresa empresa)
         {
-            if (id != tape.Id)
+            if (id != empresa.Id)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace ManagmentRR.Controllers
             {
                 try
                 {
-                    _context.Update(tape);
+                    _context.Update(empresa);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TapeExists(tape.Id))
+                    if (!EmpresaExists(empresa.Id))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace ManagmentRR.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", tape.EmpresaId);
-            return View(tape);
+            return View(empresa);
         }
 
-        // GET: Tapes/Delete/5
+        // GET: Empresas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace ManagmentRR.Controllers
                 return NotFound();
             }
 
-            var tape = await _context.Tape
-                .Include(t => t.Empresa)
+            var empresa = await _context.Empresas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tape == null)
+            if (empresa == null)
             {
                 return NotFound();
             }
 
-            return View(tape);
+            return View(empresa);
         }
 
-        // POST: Tapes/Delete/5
+        // POST: Empresas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tape = await _context.Tape.FindAsync(id);
-            _context.Tape.Remove(tape);
+            var empresa = await _context.Empresas.FindAsync(id);
+            _context.Empresas.Remove(empresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TapeExists(int id)
+        private bool EmpresaExists(int id)
         {
-            return _context.Tape.Any(e => e.Id == id);
+            return _context.Empresas.Any(e => e.Id == id);
         }
     }
 }
