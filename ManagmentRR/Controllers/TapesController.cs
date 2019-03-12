@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ManagmentRR.Models;
+using ManagmentRR.Models.ViewModels;
 
 namespace ManagmentRR.Controllers
 {
     public class TapesController : Controller
     {
         private readonly ManagmentRRContext _context;
+        private readonly Services.EmpresaServices  _empresaService;
 
-        public TapesController(ManagmentRRContext context)
+        public TapesController(ManagmentRRContext context, Services.EmpresaServices empresaService)
         {
             _context = context;
+            _empresaService = empresaService;
         }
 
         // GET: Tapes
@@ -47,8 +50,10 @@ namespace ManagmentRR.Controllers
         // GET: Tapes/Create
         public IActionResult Create()
         {
+            var empresas = _empresaService.FindEmpresa();
+            var viewModel = new TapeCreateViewModel { Empresas = empresas };
             ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id");
-            return View();
+            return View(viewModel);
         }
 
         // POST: Tapes/Create
