@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ManagmentRR</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-yeti.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -28,20 +30,24 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ManagmentRR</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Tapes" asp-action="Index">Tapes</a></li>
-                   
-                </ul>
+           
+            <div class="mynav_navbar">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+                <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                <div class="mynav_dropdown">
+                    <button class="mynav_dropbtn">Administrator</button>
+                    <div class="mynav_dropdown-content">
+                        <a asp-area="" asp-controller="Tapes" asp-action="Index">Tapes</a>
+                        <a asp-area="" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
-
+    
     <div class="container body-content">
         @RenderBody()
         <hr />
