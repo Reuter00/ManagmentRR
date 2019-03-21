@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagmentRR.Migrations
 {
     [DbContext(typeof(ManagmentRRContext))]
-    [Migration("20190304143550_In")]
-    partial class In
+    [Migration("20190321215026_Users")]
+    partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,24 @@ namespace ManagmentRR.Migrations
                     b.HasIndex("EmpresaId");
 
                     b.ToTable("Tape");
+                });
+
+            modelBuilder.Entity("ManagmentRR.Models.Users", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AdminPriv");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<string>("Password");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ManagmentRR.Models.Tape", b =>

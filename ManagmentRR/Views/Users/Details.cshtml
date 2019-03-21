@@ -1,4 +1,4 @@
-﻿@model ManagmentRR.Models.Tape
+﻿@model ManagmentRR.Models.Users
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Tape</h4>
+    <h4>Users</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,16 +17,16 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Data)
+            @Html.DisplayNameFor(model => model.Password)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Data)
+            @Html.DisplayFor(model => model.Password)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Empresa)
+            @Html.DisplayNameFor(model => model.AdminPriv)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Empresa.Nome)
+            @Html.DisplayFor(model => model.AdminPriv)
         </dd>
     </dl>
 </div>

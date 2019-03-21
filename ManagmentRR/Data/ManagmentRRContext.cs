@@ -15,5 +15,6 @@ namespace ManagmentRR.Models
 
         public DbSet<Tape> Tape { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }
