@@ -3,14 +3,16 @@ using System;
 using ManagmentRR.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ManagmentRR.Migrations
 {
     [DbContext(typeof(ManagmentRRContext))]
-    partial class ManagmentRRContextModelSnapshot : ModelSnapshot
+    [Migration("20190322184708_TrocaTape")]
+    partial class TrocaTape
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

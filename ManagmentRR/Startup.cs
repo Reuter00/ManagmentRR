@@ -15,6 +15,7 @@ using ManagmentRR.Data;
 using ManagmentRR.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+
 namespace ManagmentRR
 {
     public class Startup
@@ -45,6 +46,8 @@ builder.MigrationsAssembly("ManagmentRR")));
 
             services.AddScoped<SeedingService>();
             services.AddScoped<EmpresaServices>();
+            services.AddScoped<UserServices>();
+            services.AddScoped<TapeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
